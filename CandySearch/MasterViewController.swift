@@ -29,23 +29,30 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     // Setup the search footer
     tableView.tableFooterView = searchFooter
-    
-    candies = [
-      Candy(category:"Chocolate", name:"Chocolate Bar"),
-      Candy(category:"Chocolate", name:"Chocolate Chip"),
-      Candy(category:"Chocolate", name:"Dark Chocolate"),
-      Candy(category:"Hard", name:"Lollipop"),
-      Candy(category:"Hard", name:"Candy Cane"),
-      Candy(category:"Hard", name:"Jaw Breaker"),
-      Candy(category:"Other", name:"Caramel"),
-      Candy(category:"Other", name:"Sour Chew"),
-      Candy(category:"Other", name:"Gummi Bear"),
-      Candy(category:"Other", name:"Candy Floss"),
-      Candy(category:"Chocolate", name:"Chocolate Coin"),
-      Candy(category:"Chocolate", name:"Chocolate Egg"),
-      Candy(category:"Other", name:"Jelly Beans"),
-      Candy(category:"Other", name:"Liquorice"),
-      Candy(category:"Hard", name:"Toffee Apple")]
+    candies = []
+    if let path = Bundle.main.path(forResource: "data", ofType: "json") {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+            let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+            let x = jsonResult as! [Any]
+            for data in x {
+                let data = data as! Dictionary<String, Any>
+                let source = data["_source"]
+                let xyz = source as! Dictionary<String, Any>
+                let year = xyz["original_publication_year"]
+                let title = xyz["original_title"]
+                let url = xyz["image"]
+                let a = year!
+                let b = title!
+                let c = url!
+                candies.append(Candy(category: a as? String ?? "", name: b as? String ?? "", url: c as? String ?? ""))
+            }
+            
+        } catch {
+            // handle error
+            print("err")
+        }
+    }
     
     if let splitViewController = splitViewController {
       let controllers = splitViewController.viewControllers

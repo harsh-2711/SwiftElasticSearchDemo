@@ -15,7 +15,9 @@ class DetailViewController: UIViewController {
     if let detailCandy = detailCandy {
       if let detailDescriptionLabel = detailDescriptionLabel, let candyImageView = candyImageView {
         detailDescriptionLabel.text = detailCandy.name
-        candyImageView.image = UIImage(named: detailCandy.name)
+        let url = URL(string: detailCandy.url)
+        let data = try? Data(contentsOf: url!)
+        candyImageView.image = UIImage(data: data!)
         title = detailCandy.category
       }
     }
