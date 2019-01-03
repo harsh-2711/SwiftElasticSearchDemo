@@ -122,16 +122,23 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
   
   // MARK: - Private instance methods
   
-  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-    filteredCandies = candies.filter({( candy : Candy) -> Bool in
-      let doesCategoryMatch = (scope == "All") || (candy.category == scope)
-      
-      if searchBarIsEmpty() {
-        return doesCategoryMatch
-      } else {
-        return doesCategoryMatch && candy.name.lowercased().contains(searchText.lowercased())
-      }
-    })
+  func filterContentForSearchText(searchJson: [Any]) {
+    print(searchJson)
+    var newCandies = [Candy]()
+    newCandies = []
+    for data in searchJson {
+        let data = data as! Dictionary<String, Any>
+        let source = data["_source"]
+        let xyz = source as! Dictionary<String, Any>
+        let year = xyz["original_publication_year"]
+        let title = xyz["original_title"]
+        let url = xyz["image"]
+        let a = year!
+        let b = title!
+        let c = url!
+        newCandies.append(Candy(category: a as? String ?? "", name: b as? String ?? "", url: c as? String ?? ""))
+    }
+    filteredCandies = newCandies
     tableView.reloadData()
   }
   
@@ -164,14 +171,23 @@ extension MasterViewController: UISearchResultsUpdating {
             ]
         ]
     ]
-    elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
-        var json = json as! Dictionary<String, Any>
-        json = json["hits"] as! Dictionary<String, Any>
-        let a = json
-        let b = a["hits"]!
-        print(b as! [Any])
+    var finalJson:[Any] = []
+    let group = DispatchGroup()
+    group.enter()
+    DispatchQueue.global().async {
+        self.elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
+            var json = json as! Dictionary<String, Any>
+            json = json["hits"] as? Dictionary<String, Any> ?? [:]
+            let a = json
+            let b = a["hits"] ?? [:]
+            finalJson = b as? [Any] ?? []
+            //        print(finalJson)
+            group.leave()
+        }
+
     }
+    group.wait()
     print(searchController.searchBar.text!)
-    filterContentForSearchText(searchController.searchBar.text!)
+    filterContentForSearchText(searchJson: finalJson)
   }
 }
