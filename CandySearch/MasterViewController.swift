@@ -10,6 +10,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
   var detailViewController: DetailViewController? = nil
   var candies = [Candy]()
   var filteredCandies = [Candy]()
+  let elasticClient = Client.init(app: "new_movie_app", credentials: "4oPCtg8U6:3470e2d8-6559-4d8d-9635-400cc6a4b74c")
   let searchController = UISearchController(searchResultsController: nil)
   
   // MARK: - View Setup
@@ -156,6 +157,21 @@ extension MasterViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     //let searchBar = searchController.searchBar
 //    let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+    let body:[String:Any] = [
+        "query": [
+            "match": [
+                "original_title": searchController.searchBar.text!
+            ]
+        ]
+    ]
+    elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
+        var json = json as! Dictionary<String, Any>
+        json = json["hits"] as! Dictionary<String, Any>
+        let a = json
+        let b = a["hits"]!
+        print(b as! [Any])
+    }
+    print(searchController.searchBar.text!)
     filterContentForSearchText(searchController.searchBar.text!)
   }
 }
