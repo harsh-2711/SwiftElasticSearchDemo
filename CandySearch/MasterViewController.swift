@@ -158,7 +158,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
 //    filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
 //  }
 //}
-
+var finalJson:[Any] = []
 extension MasterViewController: UISearchResultsUpdating {
   // MARK: - UISearchResultsUpdating Delegate
   func updateSearchResults(for searchController: UISearchController) {
@@ -167,27 +167,26 @@ extension MasterViewController: UISearchResultsUpdating {
     let body:[String:Any] = [
         "query": [
             "match_phrase_prefix": [
-                "original_title": searchController.searchBar.text!
+                 "original_title" : [
+                    "query" : searchController.searchBar.text!,
+                    "slop":  50
+                ]
             ]
         ]
     ]
-    var finalJson:[Any] = []
-    let group = DispatchGroup()
-    group.enter()
-    DispatchQueue.global().async {
-        self.elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
-            var json = json as! Dictionary<String, Any>
-            json = json["hits"] as? Dictionary<String, Any> ?? [:]
-            let a = json
-            let b = a["hits"] ?? [:]
-            finalJson = b as? [Any] ?? []
-            //        print(finalJson)
-            group.leave()
-        }
 
+    
+    elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
+        var json = json as! Dictionary<String, Any>
+        json = json["hits"] as? Dictionary<String, Any> ?? [:]
+        let a = json
+        let b = a["hits"] ?? [:]
+        finalJson = b as? [Any] ?? []
+            //print(finalJson)
     }
-    group.wait()
     print(searchController.searchBar.text!)
     filterContentForSearchText(searchJson: finalJson)
+    filterContentForSearchText(searchJson: finalJson)
+
   }
 }
