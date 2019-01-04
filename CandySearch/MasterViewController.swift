@@ -166,7 +166,7 @@ extension MasterViewController: UISearchResultsUpdating {
 //    let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
     let body:[String:Any] = [
         "query": [
-            "match": [
+            "match_phrase_prefix": [
                 "original_title": searchController.searchBar.text!
             ]
         ]
