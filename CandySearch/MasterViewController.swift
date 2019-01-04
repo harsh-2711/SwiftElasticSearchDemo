@@ -158,7 +158,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
 //    filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
 //  }
 //}
-
+var finalJson:[Any] = []
 extension MasterViewController: UISearchResultsUpdating {
   // MARK: - UISearchResultsUpdating Delegate
   func updateSearchResults(for searchController: UISearchController) {
@@ -166,28 +166,28 @@ extension MasterViewController: UISearchResultsUpdating {
 //    let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
     let body:[String:Any] = [
         "query": [
-            "match": [
-                "original_title": searchController.searchBar.text!
+            "match_phrase_prefix": [
+                 "original_title" : [
+                    "query" : searchController.searchBar.text!,
+                    "analyzer": "standard",
+                    "max_expansions": 30
+                ]
             ]
         ]
     ]
-    var finalJson:[Any] = []
-    let group = DispatchGroup()
-    group.enter()
-    DispatchQueue.global().async {
-        self.elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
-            var json = json as! Dictionary<String, Any>
-            json = json["hits"] as? Dictionary<String, Any> ?? [:]
-            let a = json
-            let b = a["hits"] ?? [:]
-            finalJson = b as? [Any] ?? []
-            //        print(finalJson)
-            group.leave()
-        }
 
+    
+    elasticClient.search(type: "good-books-ds" , body: body) { (json,response, error) in
+        var json = json as! Dictionary<String, Any>
+        json = json["hits"] as? Dictionary<String, Any> ?? [:]
+        let a = json
+        let b = a["hits"] ?? [:]
+        finalJson = b as? [Any] ?? []
+            //print(finalJson)
     }
-    group.wait()
     print(searchController.searchBar.text!)
     filterContentForSearchText(searchJson: finalJson)
+    filterContentForSearchText(searchJson: finalJson)
+
   }
 }
