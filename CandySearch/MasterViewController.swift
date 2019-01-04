@@ -169,7 +169,8 @@ extension MasterViewController: UISearchResultsUpdating {
             "match_phrase_prefix": [
                  "original_title" : [
                     "query" : searchController.searchBar.text!,
-                    "slop":  50
+                    "analyzer": "standard",
+                    "max_expansions": 30
                 ]
             ]
         ]
