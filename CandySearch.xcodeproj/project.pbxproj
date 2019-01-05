@@ -20,16 +20,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		04049B7A21DE3DC200011EBE /* PBXContainerItemProxy */ = {
+		0472B08821E0F40100FD1E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 04049B7521DE3DC100011EBE /* SwiftElasticSearch.xcodeproj */;
+			containerPortal = 0472B08321E0F40100FD1E72 /* SwiftElasticSearch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D92762B9218F260A00564DF4;
 			remoteInfo = SwiftElasticSearch;
 		};
-		04049B7C21DE3DC200011EBE /* PBXContainerItemProxy */ = {
+		0472B08A21E0F40100FD1E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 04049B7521DE3DC100011EBE /* SwiftElasticSearch.xcodeproj */;
+			containerPortal = 0472B08321E0F40100FD1E72 /* SwiftElasticSearch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D92762C2218F260B00564DF4;
 			remoteInfo = SwiftElasticSearchTests;
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		04049B7221DD5B5200011EBE /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		04049B7521DE3DC100011EBE /* SwiftElasticSearch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftElasticSearch.xcodeproj; path = ../SwiftElasticSearch/SwiftElasticSearch.xcodeproj; sourceTree = "<group>"; };
+		0472B08321E0F40100FD1E72 /* SwiftElasticSearch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftElasticSearch.xcodeproj; path = SwiftElasticSearch/SwiftElasticSearch.xcodeproj; sourceTree = "<group>"; };
 		171E0C7A1B8E5B84001E6242 /* CandySearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandySearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		171E0C7D1B8E5B84001E6242 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		171E0C7F1B8E5B84001E6242 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -63,11 +63,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04049B7621DE3DC100011EBE /* Products */ = {
+		0472B08421E0F40100FD1E72 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04049B7B21DE3DC200011EBE /* SwiftElasticSearch.framework */,
-				04049B7D21DE3DC200011EBE /* SwiftElasticSearchTests.xctest */,
+				0472B08921E0F40100FD1E72 /* SwiftElasticSearch.framework */,
+				0472B08B21E0F40100FD1E72 /* SwiftElasticSearchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,7 +75,7 @@
 		171E0C711B8E5B84001E6242 = {
 			isa = PBXGroup;
 			children = (
-				04049B7521DE3DC100011EBE /* SwiftElasticSearch.xcodeproj */,
+				0472B08321E0F40100FD1E72 /* SwiftElasticSearch.xcodeproj */,
 				171E0C7C1B8E5B84001E6242 /* CandySearch */,
 				171E0C7B1B8E5B84001E6242 /* Products */,
 				D903C23B21DC8B850093C98F /* Frameworks */,
@@ -163,8 +163,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 04049B7621DE3DC100011EBE /* Products */;
-					ProjectRef = 04049B7521DE3DC100011EBE /* SwiftElasticSearch.xcodeproj */;
+					ProductGroup = 0472B08421E0F40100FD1E72 /* Products */;
+					ProjectRef = 0472B08321E0F40100FD1E72 /* SwiftElasticSearch.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -175,18 +175,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		04049B7B21DE3DC200011EBE /* SwiftElasticSearch.framework */ = {
+		0472B08921E0F40100FD1E72 /* SwiftElasticSearch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftElasticSearch.framework;
-			remoteRef = 04049B7A21DE3DC200011EBE /* PBXContainerItemProxy */;
+			remoteRef = 0472B08821E0F40100FD1E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		04049B7D21DE3DC200011EBE /* SwiftElasticSearchTests.xctest */ = {
+		0472B08B21E0F40100FD1E72 /* SwiftElasticSearchTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SwiftElasticSearchTests.xctest;
-			remoteRef = 04049B7C21DE3DC200011EBE /* PBXContainerItemProxy */;
+			remoteRef = 0472B08A21E0F40100FD1E72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
